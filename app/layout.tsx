@@ -29,6 +29,25 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Blocking script to set theme before React hydrates - must be first in body */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  var systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var initialTheme = theme || (systemPrefersDark ? 'dark' : 'light');
+                  if (initialTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <div className="fixed right-4 top-4 z-50">
           <ThemeToggle />
         </div>

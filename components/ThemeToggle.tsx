@@ -13,16 +13,22 @@ export default function ThemeToggle() {
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const initialTheme = stored || (systemPrefersDark ? "dark" : "light");
     setTheme(initialTheme);
-    applyTheme(initialTheme);
+    // Sync with what was set by the blocking script
+    const currentClass = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    if (currentClass !== initialTheme) {
+      applyTheme(initialTheme);
+    }
   }, []);
 
   // Apply theme to document
   const applyTheme = (newTheme: "light" | "dark") => {
     const root = document.documentElement;
+    // Remove both classes first to ensure clean state
+    root.classList.remove("dark", "light");
     if (newTheme === "dark") {
       root.classList.add("dark");
     } else {
-      root.classList.remove("dark");
+      root.classList.add("light");
     }
   };
 
