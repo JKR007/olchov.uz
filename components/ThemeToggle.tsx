@@ -1,24 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+// Helper function to get initial theme (can be called during render)
+function getInitialTheme(): "light" | "dark" {
+  if (typeof window === "undefined") return "light";
+  
+  // Read from DOM (set by blocking script)
+  const hasDarkClass = document.documentElement.classList.contains("dark");
+  if (hasDarkClass) return "dark";
+  
+  // Fallback to localStorage or system preference
+  const stored = localStorage.getItem("theme") as "light" | "dark" | null;
+  if (stored) return stored;
+  
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return systemPrefersDark ? "dark" : "light";
+}
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  // Initialize theme from DOM/localStorage (blocking script sets it first)
+  const [theme, setTheme] = useState<"light" | "dark">(() => getInitialTheme());
   const [mounted, setMounted] = useState(false);
-
-  // Initialize theme from localStorage or system preference
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem("theme") as "light" | "dark" | null;
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme = stored || (systemPrefersDark ? "dark" : "light");
-    setTheme(initialTheme);
-    // Sync with what was set by the blocking script
-    const currentClass = document.documentElement.classList.contains("dark") ? "dark" : "light";
-    if (currentClass !== initialTheme) {
-      applyTheme(initialTheme);
-    }
-  }, []);
+  const hasInitialized = useRef(false);
 
   // Apply theme to document
   const applyTheme = (newTheme: "light" | "dark") => {
@@ -31,6 +35,27 @@ export default function ThemeToggle() {
       root.classList.add("light");
     }
   };
+
+  // Initialize on mount (only once)
+  useEffect(() => {
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+    
+    // Set mounted flag asynchronously to avoid synchronous setState
+    const timeoutId = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    
+    // Sync theme with DOM (in case blocking script and state differ)
+    const currentClass = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    const currentTheme = theme;
+    if (currentClass !== currentTheme) {
+      applyTheme(currentTheme);
+    }
+    
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty deps - only run once on mount
 
   // Toggle theme
   const toggleTheme = () => {
