@@ -18,4 +18,3 @@ export function roundSmart(value: number) {
   // "1.0000" kabi ko'rinishni tozalash
   return String(rounded);
 }
-

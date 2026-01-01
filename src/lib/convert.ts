@@ -26,4 +26,3 @@ export function cToF(c: number) {
 export function fToC(f: number) {
   return ((f - 32) * 5) / 9;
 }
-

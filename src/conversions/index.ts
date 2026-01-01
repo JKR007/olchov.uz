@@ -16,10 +16,7 @@ export type ConversionCategory = "uzunlik" | "ogirlik" | "maydon" | "hajm" | "ha
  * - hajm: base = litr
  * - harorat: special case (uses formulas, not factors)
  */
-export const FACTORS: Record<
-  Exclude<ConversionCategory, "harorat">,
-  Record<string, number>
-> = {
+export const FACTORS: Record<Exclude<ConversionCategory, "harorat">, Record<string, number>> = {
   // base: metr
   uzunlik: {
     metr: 1,
@@ -62,4 +59,3 @@ export const FACTORS: Record<
 export function isTemperatureCategory(category: ConversionCategory) {
   return category === "harorat";
 }
-
