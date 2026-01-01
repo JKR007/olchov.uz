@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CATEGORIES, findPair, UNITS, type CategorySlug } from "@/config/routes";
+import ConverterClient from "@/components/ConverterClient";
+import type { ConversionCategory } from "@/conversions";
 
-// NOTE: Converter UI live-calculation uchun client component kerak bo'ladi.
-// V1 skeleton: hozir server page + minimal UI.
-// Keyingi step'da: <ConverterClient /> (useState) qilib to'liq ishlatamiz.
-
-type Params = { category: string; pair: string };
+type Params = Promise<{ category: string; pair: string }>;
 
 export function generateStaticParams() {
   return (
@@ -30,13 +28,14 @@ function getUnitVariants(unitSlug: string) {
   return u?.variants ?? [];
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const found = findPair(params.category, params.pair);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { category, pair: pairSlug } = await params;
+  const found = findPair(category, pairSlug);
   if (!found) return {};
 
   const { config, from, to, pair } = found;
 
-  // SEO Page Template'ga mos title/description (V1)
+  // SEO Page Template'ga mos title/description
   const fromLabel = getUnitLabel(from);
   const toLabel = getUnitLabel(to);
 
@@ -60,9 +59,13 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function ConverterPage({ params }: { params: Params }) {
-  const found = findPair(params.category, params.pair);
-  if (!found) notFound();
+export default async function ConverterPage({ params }: { params: Params }) {
+  const { category, pair: pairSlug } = await params;
+
+  const found = findPair(category, pairSlug);
+  if (!found) {
+    notFound();
+  }
 
   const { config, from, to } = found;
 
@@ -88,58 +91,27 @@ export default function ConverterPage({ params }: { params: Params }) {
           {fromLabel}ni {toLabel}ga aylantirish
         </h1>
         <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-          Bu sahifa V1 skeleton. Keyingi bosqichda kalkulyator inputlari va live natija
-          qo&apos;shamiz.
+          {fromLabel}ni {toLabel}ga tez va aniq aylantiring. Real vaqtda hisob-kitob.
         </p>
       </header>
 
-      {/* Converter UI placeholder */}
-      <section className="mt-8 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white">
-          {fromLabel} → {toLabel} konvertori
-        </h2>
-
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div>
-            <label className="block text-sm font-medium text-gray-900 dark:text-white">
-              {fromLabel} (From)
-            </label>
-            <input
-              className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              placeholder="Masalan: 1"
-              disabled
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-900 dark:text-white">
-              {toLabel} (To)
-            </label>
-            <input
-              className="mt-1 w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              placeholder="Natija (V1: keyin chiqadi)"
-              disabled
-            />
-          </div>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link
-            href={reverseHref}
-            className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-          >
-            Teskari konvertor: {toLabel} → {fromLabel}
-          </Link>
-        </div>
-      </section>
+      {/* Converter UI */}
+      <ConverterClient
+        category={config.slug as ConversionCategory}
+        from={from}
+        to={to}
+        fromLabel={fromLabel}
+        toLabel={toLabel}
+        reverseHref={reverseHref}
+      />
 
       {/* Formula / Explanation block (SEO template) */}
-      <section className="mt-8 space-y-3 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+      <section className="mt-8 space-y-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">
           {fromLabel}dan {toLabel}ga o&apos;tkazish formulasi
         </h2>
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          Bu yerda V1&apos;da qisqa va aniq izoh bo&apos;ladi (keyingi step&apos;da conversion
-          logic&apos;ga bog&apos;laymiz).
+          Bu yerda qisqa va aniq izoh bo&apos;ladi.
         </p>
         <p className="text-sm text-gray-700 dark:text-gray-300">
           Foydalanuvchilar {fromLabel}ni turlicha yozishi mumkin (masalan:{" "}
@@ -148,12 +120,12 @@ export default function ConverterPage({ params }: { params: Params }) {
       </section>
 
       {/* Related links (minimal) */}
-      <section className="mt-8 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+      <section className="mt-8 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">
           Bog&apos;liq konvertorlar
         </h2>
         <div className="mt-3 space-y-2">
-          {/* V1: simple related = reverse + first 2 in category */}
+          {/* Related conversions: reverse + first 2 in category */}
           <Link
             className="block text-sm text-gray-900 hover:underline dark:text-white"
             href={reverseHref}
