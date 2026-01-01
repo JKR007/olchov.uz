@@ -147,8 +147,7 @@ export default async function ConverterPage({ params }: { params: Params }) {
           {config.pairs
             .filter(
               (p) =>
-                `${p.from}-${p.to}` !== `${from}-${to}` &&
-                `${p.from}-${p.to}` !== `${to}-${from}`
+                `${p.from}-${p.to}` !== `${from}-${to}` && `${p.from}-${p.to}` !== `${to}-${from}`
             )
             .slice(0, 2)
             .map((p) => {

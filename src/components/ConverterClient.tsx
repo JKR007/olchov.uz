@@ -115,7 +115,9 @@ export default function ConverterClient({
             className="block text-sm font-medium text-gray-900 dark:text-white"
           >
             {fromLabel}
-            {fromSymbol && <span className="ml-1 text-gray-500 dark:text-gray-400">({fromSymbol})</span>}
+            {fromSymbol && (
+              <span className="ml-1 text-gray-500 dark:text-gray-400">({fromSymbol})</span>
+            )}
           </label>
           <input
             id="converter-from"
@@ -139,7 +141,9 @@ export default function ConverterClient({
             className="block text-sm font-medium text-gray-900 dark:text-white"
           >
             {toLabel}
-            {toSymbol && <span className="ml-1 text-gray-500 dark:text-gray-400">({toSymbol})</span>}
+            {toSymbol && (
+              <span className="ml-1 text-gray-500 dark:text-gray-400">({toSymbol})</span>
+            )}
           </label>
           <div className="relative mt-1">
             <input
