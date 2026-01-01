@@ -248,6 +248,11 @@ export const CATEGORIES: Record<CategorySlug, CategoryConfig> = {
         keywords: ["litr gallon", "liter to gallon", "1 litr necha gallon"],
       },
       {
+        from: "gallon",
+        to: "litr",
+        keywords: ["gallon litr", "gallon to liter", "1 gallon necha litr"],
+      },
+      {
         from: "ml",
         to: "litr",
         keywords: ["ml litr", "ml to liter", "1000 ml necha litr"],
