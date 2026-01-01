@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CATEGORIES, type CategorySlug } from "@/config/routes";
+import { CATEGORIES, UNITS, type CategorySlug } from "@/config/routes";
+
+function getUnitLabel(unitSlug: string): string {
+  const unit = Object.values(UNITS).find((u) => u.slug === unitSlug);
+  return unit?.label ?? unitSlug;
+}
 
 type Params = { category: string };
 
@@ -50,17 +55,16 @@ export default function CategoryPage({ params }: { params: Params }) {
               <Link
                 key={`${href}-${idx}`}
                 href={href}
-                className="rounded-xl border border-gray-200 bg-white p-4 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+                className="block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-700"
               >
                 <div className="text-sm font-medium text-gray-900 dark:text-white">
-                  {p.from} → {p.to}
+                  {getUnitLabel(p.from)} → {getUnitLabel(p.to)}
                 </div>
                 {p.keywords?.length ? (
                   <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
                     Qidiruv variantlari: {p.keywords.slice(0, 3).join(", ")}
                   </div>
                 ) : null}
-                <div className="mt-2 text-xs text-gray-500 dark:text-gray-500">{href}</div>
               </Link>
             );
           })}
