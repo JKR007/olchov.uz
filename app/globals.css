@@ -3,6 +3,7 @@
 /* Tailwind CSS v4 dark mode configuration */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Default light mode (applies when no class is set) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -15,17 +16,30 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Dark mode via class (manual toggle) */
+/* Light mode via class (explicit) */
+:root.light {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Dark mode via class (explicit) */
 :root.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
 }
 
-/* Fallback: system preference (if no manual selection) */
+/* Fallback: system preference (only if no class is set - should not happen with blocking script) */
 @media (prefers-color-scheme: dark) {
   :root:not(.light):not(.dark) {
     --background: #0a0a0a;
     --foreground: #ededed;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not(.light):not(.dark) {
+    --background: #ffffff;
+    --foreground: #171717;
   }
 }
 
