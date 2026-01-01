@@ -38,7 +38,7 @@ function getPopularConverter(categorySlug: string): string | null {
 export default function HomePage() {
   const allPages = getAllConverterPages(); // global directory + search uchun
 
-  // V1: homepage "top links" — most popular converters
+  // Homepage "top links" — most popular converters
   const topLinks = [
     "/uzunlik/dyuym-santimetr",
     "/ogirlik/kg-funt",
@@ -75,10 +75,10 @@ export default function HomePage() {
           )}
         </div>
 
-        {/* Global Search (V1 skeleton: keyin client component qilib kuchaytiramiz) */}
-        <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+        {/* Global Search */}
+        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
           <label className="block text-sm font-medium text-gray-900 dark:text-white">
-            Qidirish (V1)
+            Qidirish
           </label>
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Masalan: <span className="font-medium">dyuym sm</span>,{" "}
@@ -86,7 +86,6 @@ export default function HomePage() {
             <span className="font-medium">sotix gektar</span>
           </p>
           <div className="mt-3">
-            {/* V1: Search UI placeholder only */}
             <input
               className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black/10 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
               placeholder="Tez orada: qidiruv natijalari shu yerda chiqadi…"
@@ -108,7 +107,7 @@ export default function HomePage() {
               <Link
                 key={href}
                 href={href}
-                className="rounded-xl border border-gray-200 bg-white p-4 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+                className="block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-700"
               >
                 <div className="text-sm font-medium text-gray-900 dark:text-white">{name}</div>
                 <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
@@ -126,10 +125,10 @@ export default function HomePage() {
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {(Object.values(CATEGORIES) as Array<(typeof CATEGORIES)[keyof typeof CATEGORIES]>).map(
             (cat) => (
-              <div
-                key={cat.slug}
-                className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
-              >
+            <div
+              key={cat.slug}
+              className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+            >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <div className="text-base font-semibold text-gray-900 dark:text-white">
@@ -153,15 +152,13 @@ export default function HomePage() {
                     const fromLabel = getUnitLabel(p.from);
                     const toLabel = getUnitLabel(p.to);
                     return (
-                      <Link
-                        key={href}
-                        href={href}
-                        className="block rounded-lg px-2 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
-                      >
-                        <span className="text-gray-900 dark:text-white">
-                          {fromLabel} → {toLabel}
-                        </span>
-                      </Link>
+                    <Link
+                      key={href}
+                      href={href}
+                      className="block rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:bg-gray-700"
+                    >
+                      {fromLabel} → {toLabel}
+                    </Link>
                     );
                   })}
                 </div>
@@ -171,15 +168,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FULL DIRECTORY (V1) */}
+      {/* FULL DIRECTORY */}
       <section className="mt-10">
         <h2
           className="text-lg font-semibold text-gray-900 dark:text-white"
           id="barcha-konvertorlar"
         >
-          Barcha konvertorlar (V1)
+          Barcha konvertorlar
         </h2>
-        <div className="mt-4 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+        <div className="mt-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {allPages.map((p) => {
               const name = getConverterName(p.path);
@@ -187,9 +184,9 @@ export default function HomePage() {
                 <Link
                   key={p.path}
                   href={p.path}
-                  className="rounded-lg px-2 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+                  className="block rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:bg-gray-700"
                 >
-                  <span className="font-medium text-gray-900 dark:text-white">{name}</span>
+                  {name}
                 </Link>
               );
             })}
