@@ -36,6 +36,21 @@ export default function RootLayout({
                   var theme = localStorage.getItem('theme');
                   var systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                   var initialTheme = theme || (systemPrefersDark ? 'dark' : 'light');
+                  
+                  // Set inline styles immediately to prevent flash
+                  if (initialTheme === 'dark') {
+                    //  Comment this Part out - Intentionally
+                    // document.documentElement.style.setProperty('--background', '#0a0a0a');
+                    // document.documentElement.style.setProperty('--foreground', '#ededed');
+                  } else {
+                    document.documentElement.style.setProperty('--background', '#ffffff');
+                    document.documentElement.style.setProperty('--foreground', '#171717');
+                  }
+                  
+                  // Remove both classes first to ensure clean state
+                  document.documentElement.classList.remove('dark', 'light');
+                  
+                  // Explicitly set the correct class
                   if (initialTheme === 'dark') {
                     document.documentElement.classList.add('dark');
                   } else {
