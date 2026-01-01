@@ -5,15 +5,15 @@ import { useEffect, useState, useRef } from "react";
 // Helper function to get initial theme (can be called during render)
 function getInitialTheme(): "light" | "dark" {
   if (typeof window === "undefined") return "light";
-  
+
   // Read from DOM (set by blocking script)
   const hasDarkClass = document.documentElement.classList.contains("dark");
   if (hasDarkClass) return "dark";
-  
+
   // Fallback to localStorage or system preference
   const stored = localStorage.getItem("theme") as "light" | "dark" | null;
   if (stored) return stored;
-  
+
   const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   return systemPrefersDark ? "dark" : "light";
 }
@@ -40,19 +40,19 @@ export default function ThemeToggle() {
   useEffect(() => {
     if (hasInitialized.current) return;
     hasInitialized.current = true;
-    
+
     // Set mounted flag asynchronously to avoid synchronous setState
     const timeoutId = setTimeout(() => {
       setMounted(true);
     }, 0);
-    
+
     // Sync theme with DOM (in case blocking script and state differ)
     const currentClass = document.documentElement.classList.contains("dark") ? "dark" : "light";
     const currentTheme = theme;
     if (currentClass !== currentTheme) {
       applyTheme(currentTheme);
     }
-    
+
     return () => clearTimeout(timeoutId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty deps - only run once on mount
@@ -97,4 +97,3 @@ export default function ThemeToggle() {
     </button>
   );
 }
-
