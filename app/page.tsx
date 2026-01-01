@@ -87,7 +87,7 @@ export default function HomePage() {
           </p>
           <div className="mt-3">
             <input
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black/10 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-black/10 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400"
               placeholder="Tez orada: qidiruv natijalari shu yerda chiqadi…"
               disabled
             />
@@ -110,9 +110,6 @@ export default function HomePage() {
                 className="block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-700"
               >
                 <div className="text-sm font-medium text-gray-900 dark:text-white">{name}</div>
-                <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-                  Tez ochish → konvertor sahifasi
-                </div>
               </Link>
             );
           })}

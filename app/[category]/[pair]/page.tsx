@@ -18,9 +18,18 @@ export function generateStaticParams() {
   );
 }
 
-function getUnitLabel(unitSlug: string) {
+function getUnitLabel(unitSlug: string, includeSymbol = false) {
   const u = Object.values(UNITS).find((x) => x.slug === unitSlug);
-  return u?.label ?? unitSlug;
+  if (!u) return unitSlug;
+  if (includeSymbol && u.symbol) {
+    return `${u.label} (${u.symbol})`;
+  }
+  return u.label;
+}
+
+function getUnitSymbol(unitSlug: string): string | undefined {
+  const u = Object.values(UNITS).find((x) => x.slug === unitSlug);
+  return u?.symbol;
 }
 
 function getUnitVariants(unitSlug: string) {
@@ -102,6 +111,8 @@ export default async function ConverterPage({ params }: { params: Params }) {
         to={to}
         fromLabel={fromLabel}
         toLabel={toLabel}
+        fromSymbol={getUnitSymbol(from)}
+        toSymbol={getUnitSymbol(to)}
         reverseHref={reverseHref}
       />
 
@@ -134,7 +145,10 @@ export default async function ConverterPage({ params }: { params: Params }) {
           </Link>
 
           {config.pairs
-            .filter((p) => `${p.from}-${p.to}` !== `${from}-${to}`)
+            .filter(
+              (p) =>
+                `${p.from}-${p.to}` !== `${from}-${to}` && `${p.from}-${p.to}` !== `${to}-${from}`
+            )
             .slice(0, 2)
             .map((p) => {
               const href = `/${config.slug}/${p.from}-${p.to}`;
