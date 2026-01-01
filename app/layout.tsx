@@ -26,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uz" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* Blocking script to set theme before React hydrates - must be first in body */}
         <script
           dangerouslySetInnerHTML={{
