@@ -119,9 +119,7 @@ export const UNITS: Record<string, UnitConfig> = {
 // Helper: unit mavjudligini tekshirish (dev safety)
 export function assertUnitExists(unitSlug: string) {
   if (
-    !Object.values(UNITS).some(
-      (u) => u.slug === unitSlug || u.slug === unitSlug.replace("_", "-")
-    )
+    !Object.values(UNITS).some((u) => u.slug === unitSlug || u.slug === unitSlug.replace("_", "-"))
   ) {
     console.warn(`[routes] Unit not found in UNITS: "${unitSlug}"`);
   }
@@ -268,17 +266,16 @@ export const CATEGORIES: Record<CategorySlug, CategoryConfig> = {
  * -> sitemap, global search, homepage directory
  */
 export function getAllConverterPages() {
-  return (
-    Object.entries(CATEGORIES) as Array<[CategorySlug, CategoryConfig]>
-  ).flatMap(([category, cfg]) =>
-    cfg.pairs.map((p) => ({
-      category,
-      from: p.from,
-      to: p.to,
-      pairSlug: `${p.from}-${p.to}`,
-      path: `/${category}/${p.from}-${p.to}`,
-      keywords: p.keywords ?? [],
-    }))
+  return (Object.entries(CATEGORIES) as Array<[CategorySlug, CategoryConfig]>).flatMap(
+    ([category, cfg]) =>
+      cfg.pairs.map((p) => ({
+        category,
+        from: p.from,
+        to: p.to,
+        pairSlug: `${p.from}-${p.to}`,
+        path: `/${category}/${p.from}-${p.to}`,
+        keywords: p.keywords ?? [],
+      }))
   );
 }
 
