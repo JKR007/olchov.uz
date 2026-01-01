@@ -10,12 +10,13 @@ import { CATEGORIES, findPair, UNITS, type CategorySlug } from "@/config/routes"
 type Params = { category: string; pair: string };
 
 export function generateStaticParams() {
-  return (Object.entries(CATEGORIES) as Array<[CategorySlug, (typeof CATEGORIES)[CategorySlug]]>).flatMap(
-    ([category, cfg]) =>
-      cfg.pairs.map((p) => ({
-        category,
-        pair: `${p.from}-${p.to}`,
-      }))
+  return (
+    Object.entries(CATEGORIES) as Array<[CategorySlug, (typeof CATEGORIES)[CategorySlug]]>
+  ).flatMap(([category, cfg]) =>
+    cfg.pairs.map((p) => ({
+      category,
+      pair: `${p.from}-${p.to}`,
+    }))
   );
 }
 
@@ -42,11 +43,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   const fromVariants = getUnitVariants(from).slice(0, 3);
   const toVariants = getUnitVariants(to).slice(0, 3);
 
-  const extraKeywords = [
-    ...(pair.keywords ?? []),
-    ...fromVariants,
-    ...toVariants,
-  ].filter(Boolean);
+  const extraKeywords = [...(pair.keywords ?? []), ...fromVariants, ...toVariants].filter(Boolean);
 
   const title = `1 ${fromLabel} necha ${toLabel}? (${extraKeywords
     .slice(0, 4)
@@ -157,7 +154,10 @@ export default function ConverterPage({ params }: { params: Params }) {
         </h2>
         <div className="mt-3 space-y-2">
           {/* V1: simple related = reverse + first 2 in category */}
-          <Link className="block text-sm text-gray-900 hover:underline dark:text-white" href={reverseHref}>
+          <Link
+            className="block text-sm text-gray-900 hover:underline dark:text-white"
+            href={reverseHref}
+          >
             {toLabel} → {fromLabel}
           </Link>
 
@@ -181,4 +181,3 @@ export default function ConverterPage({ params }: { params: Params }) {
     </main>
   );
 }
-

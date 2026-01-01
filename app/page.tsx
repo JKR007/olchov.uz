@@ -124,54 +124,59 @@ export default function HomePage() {
       <section className="mt-10">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Kategoriyalar</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {(Object.values(CATEGORIES) as Array<(typeof CATEGORIES)[keyof typeof CATEGORIES]>).map((cat) => (
-            <div
-              key={cat.slug}
-              className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <div className="text-base font-semibold text-gray-900 dark:text-white">
-                    {cat.label}
+          {(Object.values(CATEGORIES) as Array<(typeof CATEGORIES)[keyof typeof CATEGORIES]>).map(
+            (cat) => (
+              <div
+                key={cat.slug}
+                className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <div className="text-base font-semibold text-gray-900 dark:text-white">
+                      {cat.label}
+                    </div>
+                    <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
+                      {cat.description}
+                    </p>
                   </div>
-                  <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-                    {cat.description}
-                  </p>
+                  <Link
+                    href={`/${cat.slug}`}
+                    className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+                  >
+                    Barchasi
+                  </Link>
                 </div>
-                <Link
-                  href={`/${cat.slug}`}
-                  className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-                >
-                  Barchasi
-                </Link>
-              </div>
 
-              <div className="mt-3 space-y-2">
-                {cat.pairs.slice(0, 4).map((p) => {
-                  const href = `/${cat.slug}/${p.from}-${p.to}`;
-                  const fromLabel = getUnitLabel(p.from);
-                  const toLabel = getUnitLabel(p.to);
-                  return (
-                    <Link
-                      key={href}
-                      href={href}
-                      className="block rounded-lg px-2 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
-                    >
-                      <span className="text-gray-900 dark:text-white">
-                        {fromLabel} → {toLabel}
-                      </span>
-                    </Link>
-                  );
-                })}
+                <div className="mt-3 space-y-2">
+                  {cat.pairs.slice(0, 4).map((p) => {
+                    const href = `/${cat.slug}/${p.from}-${p.to}`;
+                    const fromLabel = getUnitLabel(p.from);
+                    const toLabel = getUnitLabel(p.to);
+                    return (
+                      <Link
+                        key={href}
+                        href={href}
+                        className="block rounded-lg px-2 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+                      >
+                        <span className="text-gray-900 dark:text-white">
+                          {fromLabel} → {toLabel}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </section>
 
       {/* FULL DIRECTORY (V1) */}
       <section className="mt-10">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white" id="barcha-konvertorlar">
+        <h2
+          className="text-lg font-semibold text-gray-900 dark:text-white"
+          id="barcha-konvertorlar"
+        >
           Barcha konvertorlar (V1)
         </h2>
         <div className="mt-4 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
@@ -205,6 +210,6 @@ export default function HomePage() {
       <footer className="mt-12 border-t border-gray-200 pt-6 text-xs text-gray-600 dark:border-gray-700 dark:text-gray-400">
         © {new Date().getFullYear()} olchov.uz • Privacy • Terms • Sitemap
       </footer>
-      </main>
+    </main>
   );
 }
