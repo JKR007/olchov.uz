@@ -291,16 +291,31 @@ export function getAllCategoryPages() {
 
 /**
  * Utility: find pair config by params
+ * Handles units with hyphens (e.g., "kvadrat-metr", "kub-metr")
  */
 export function findPair(category: string, pairSlug: string) {
   const cfg = (CATEGORIES as Record<string, CategoryConfig | undefined>)[category];
   if (!cfg) return null;
 
-  const [from, to] = pairSlug.split("-");
-  if (!from || !to) return null;
+  // Try to find exact match first (handles units with hyphens)
+  const found = cfg.pairs.find((p) => `${p.from}-${p.to}` === pairSlug);
+  if (found) {
+    return { category: cfg.slug, config: cfg, pair: found, from: found.from, to: found.to };
+  }
 
-  const found = cfg.pairs.find((p) => p.from === from && p.to === to);
-  if (!found) return null;
+  // Fallback: try splitting (for backward compatibility)
+  const parts = pairSlug.split("-");
+  if (parts.length < 2) return null;
 
-  return { category: cfg.slug, config: cfg, pair: found, from, to };
+  // Try different split combinations for units with hyphens
+  for (let i = 1; i < parts.length; i++) {
+    const from = parts.slice(0, i).join("-");
+    const to = parts.slice(i).join("-");
+    const match = cfg.pairs.find((p) => p.from === from && p.to === to);
+    if (match) {
+      return { category: cfg.slug, config: cfg, pair: match, from: match.from, to: match.to };
+    }
+  }
+
+  return null;
 }
