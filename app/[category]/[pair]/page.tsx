@@ -5,7 +5,7 @@ import { CATEGORIES, findPair, UNITS, type CategorySlug } from "@/config/routes"
 import ConverterClient from "@/components/ConverterClient";
 import type { ConversionCategory } from "@/conversions";
 
-type Params = { category: string; pair: string };
+type Params = Promise<{ category: string; pair: string }>;
 
 export function generateStaticParams() {
   return (
@@ -28,8 +28,9 @@ function getUnitVariants(unitSlug: string) {
   return u?.variants ?? [];
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const found = findPair(params.category, params.pair);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { category, pair: pairSlug } = await params;
+  const found = findPair(category, pairSlug);
   if (!found) return {};
 
   const { config, from, to, pair } = found;
@@ -58,9 +59,13 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function ConverterPage({ params }: { params: Params }) {
-  const found = findPair(params.category, params.pair);
-  if (!found) notFound();
+export default async function ConverterPage({ params }: { params: Params }) {
+  const { category, pair: pairSlug } = await params;
+
+  const found = findPair(category, pairSlug);
+  if (!found) {
+    notFound();
+  }
 
   const { config, from, to } = found;
 

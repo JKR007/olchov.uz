@@ -8,7 +8,7 @@ function getUnitLabel(unitSlug: string): string {
   return unit?.label ?? unitSlug;
 }
 
-type Params = { category: string };
+type Params = Promise<{ category: string }>;
 
 export function generateStaticParams() {
   return (Object.keys(CATEGORIES) as CategorySlug[]).map((category) => ({
@@ -16,9 +16,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const category = params.category as CategorySlug;
-  const cfg = CATEGORIES[category];
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { category } = await params;
+  const cfg = CATEGORIES[category as CategorySlug];
   if (!cfg) return {};
 
   return {
@@ -28,9 +28,9 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function CategoryPage({ params }: { params: Params }) {
-  const category = params.category as CategorySlug;
-  const cfg = CATEGORIES[category];
+export default async function CategoryPage({ params }: { params: Params }) {
+  const { category } = await params;
+  const cfg = CATEGORIES[category as CategorySlug];
   if (!cfg) notFound();
 
   return (
