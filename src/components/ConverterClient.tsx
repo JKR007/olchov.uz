@@ -204,7 +204,7 @@ export default function ConverterClient({
       <div className="mt-4 flex flex-wrap gap-2">
         <Link
           href={reverseHref}
-          className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+          className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:border-blue-600 dark:hover:bg-blue-900/20 dark:hover:text-blue-400"
         >
           Teskari konvertor: {toLabel} → {fromLabel}
         </Link>

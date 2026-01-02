@@ -86,11 +86,11 @@ export default async function ConverterPage({ params }: { params: Params }) {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
       <div className="flex flex-wrap items-center gap-2 text-base text-gray-600 dark:text-gray-400">
-        <Link href="/" className="hover:underline">
+        <Link href="/" className="transition-colors hover:text-blue-600 hover:underline dark:hover:text-blue-400">
           Bosh sahifa
         </Link>
         <span>→</span>
-        <Link href={`/${config.slug}`} className="hover:underline">
+        <Link href={`/${config.slug}`} className="transition-colors hover:text-blue-600 hover:underline dark:hover:text-blue-400">
           {config.label}
         </Link>
         <span>→</span>
@@ -142,7 +142,7 @@ export default async function ConverterPage({ params }: { params: Params }) {
         <div className="mt-3 space-y-2">
           {/* Related conversions: reverse + first 2 in category */}
           <Link
-            className="block text-base text-gray-900 hover:underline dark:text-white"
+            className="block text-base text-gray-900 transition-colors hover:text-blue-600 hover:underline dark:text-white dark:hover:text-blue-400"
             href={reverseHref}
           >
             {toLabel} → {fromLabel}
@@ -159,7 +159,7 @@ export default async function ConverterPage({ params }: { params: Params }) {
               return (
                 <Link
                   key={href}
-                  className="block text-base text-gray-900 hover:underline dark:text-white"
+                  className="block text-base text-gray-900 transition-colors hover:text-blue-600 hover:underline dark:text-white dark:hover:text-blue-400"
                   href={href}
                 >
                   {getUnitLabel(p.from)} → {getUnitLabel(p.to)}

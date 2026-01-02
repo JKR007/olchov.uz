@@ -37,7 +37,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <div className="flex flex-wrap items-center gap-2 text-base text-gray-600 dark:text-gray-400">
-        <Link href="/" className="hover:underline">
+        <Link href="/" className="transition-colors hover:text-blue-600 hover:underline dark:hover:text-blue-400">
           Bosh sahifa
         </Link>
         <span>→</span>
@@ -61,9 +61,9 @@ export default async function CategoryPage({ params }: { params: Params }) {
               <Link
                 key={`${href}-${idx}`}
                 href={href}
-                className="block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-700"
+                className="group block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600 dark:hover:bg-blue-900/20"
               >
-                <div className="text-base font-medium text-gray-900 dark:text-white">
+                <div className="text-base font-medium text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
                   {getUnitLabel(p.from)} → {getUnitLabel(p.to)}
                 </div>
                 {p.keywords?.length ? (
