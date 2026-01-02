@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ThemeToggle from "@/components/ThemeToggle";
+import ThemeProvider from "@/providers/ThemeProvider";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,46 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* Blocking script to set theme before React hydrates - must be first in body */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  var systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  var initialTheme = theme || (systemPrefersDark ? 'dark' : 'light');
-                  
-                  // Set inline styles immediately to prevent flash
-                  if (initialTheme === 'dark') {
-                    //  Comment this Part out - Intentionally
-                    // document.documentElement.style.setProperty('--background', '#0a0a0a');
-                    // document.documentElement.style.setProperty('--foreground', '#ededed');
-                  } else {
-                    document.documentElement.style.setProperty('--background', '#ffffff');
-                    document.documentElement.style.setProperty('--foreground', '#171717');
-                  }
-                  
-                  // Remove both classes first to ensure clean state
-                  document.documentElement.classList.remove('dark', 'light');
-                  
-                  // Explicitly set the correct class
-                  if (initialTheme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-        <div className="fixed right-4 top-4 z-50">
-          <ThemeToggle />
-        </div>
-        {children}
+    <html lang="uz" suppressHydrationWarning className="bg-white text-gray-900 dark:bg-gray-950 dark:text-white">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-white font-sans`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
