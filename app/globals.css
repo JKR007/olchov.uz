@@ -3,7 +3,6 @@
 /* Tailwind CSS v4 dark mode configuration */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Default light mode (applies when no class is set) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -16,38 +15,70 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Light mode via class (explicit) */
-:root.light {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-/* Dark mode via class (explicit) */
+/* Dark mode via class (next-themes) */
 :root.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
 }
 
-/* Fallback: system preference (only if no class is set - should not happen with blocking script) */
+/* System preference fallback */
 @media (prefers-color-scheme: dark) {
-  :root:not(.light):not(.dark) {
+  :root:not(.light) {
     --background: #0a0a0a;
     --foreground: #ededed;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not(.light):not(.dark) {
-    --background: #ffffff;
-    --foreground: #171717;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
+}
+
+/* Improved typography */
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
 }
