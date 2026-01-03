@@ -107,11 +107,11 @@ export default function Footer() {
         <div className="mt-8 border-t border-blue-100 pt-6 dark:border-blue-900">
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
             © {currentYear}{" "}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">olchov.uz</span> • Bepul va tez o&apos;lchov birliklari konvertori
+            <span className="font-semibold text-blue-600 dark:text-blue-400">olchov.uz</span> •
+            Bepul va tez o&apos;lchov birliklari konvertori
           </p>
         </div>
       </div>
     </footer>
   );
 }
-

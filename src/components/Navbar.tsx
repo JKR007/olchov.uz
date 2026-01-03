@@ -7,7 +7,10 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 text-lg font-semibold hover:underline decoration-blue-600 dark:decoration-blue-400 underline-offset-4">
+          <Link
+            href="/"
+            className="flex items-center space-x-2 text-lg font-semibold hover:underline decoration-blue-600 dark:decoration-blue-400 underline-offset-4"
+          >
             <span className="bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-blue-300">
               olchov.uz
             </span>
@@ -62,4 +65,3 @@ export default function Navbar() {
     </nav>
   );
 }
-

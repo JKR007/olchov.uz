@@ -20,12 +20,8 @@ export const metadata: Metadata = {
   description:
     "Dyuym, santimetr, metr, kg, funt, sotix, gektar va boshqalarni onlayn aylantiring. Bepul va tez — olchov.uz",
   icons: {
-    icon: [
-      { url: "/metaimage.jpg", type: "image/jpeg" },
-    ],
-    apple: [
-      { url: "/metaimage.jpg", type: "image/jpeg" },
-    ],
+    icon: [{ url: "/metaimage.jpg", type: "image/jpeg" }],
+    apple: [{ url: "/metaimage.jpg", type: "image/jpeg" }],
     shortcut: "/metaimage.jpg",
   },
   openGraph: {
@@ -58,8 +54,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" suppressHydrationWarning className="bg-white text-gray-900 dark:bg-gray-950 dark:text-white">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-white font-sans`}>
+    <html
+      lang="uz"
+      suppressHydrationWarning
+      className="bg-white text-gray-900 dark:bg-gray-950 dark:text-white"
+    >
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-white font-sans`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

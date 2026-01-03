@@ -13,4 +13,3 @@ export function getCategoryIcon(category: CategorySlug): string {
   };
   return icons[category] || "📊";
 }
-

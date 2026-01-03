@@ -33,7 +33,7 @@ function getConverterName(path: string): string {
   const toLabel = getUnitLabel(found.to);
   const fromSymbol = getUnitSymbol(found.from);
   const toSymbol = getUnitSymbol(found.to);
-  
+
   if (fromSymbol && toSymbol) {
     return `${fromLabel} → ${toLabel} (${fromSymbol} → ${toSymbol})`;
   }
@@ -81,7 +81,9 @@ export default function HomePage() {
                   href={popularLink}
                   className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-blue-600 dark:hover:bg-blue-900/20 dark:hover:text-blue-400"
                 >
-                  <span className="mr-2">{getCategoryIcon(cat.slug as keyof typeof CATEGORIES)}</span>
+                  <span className="mr-2">
+                    {getCategoryIcon(cat.slug as keyof typeof CATEGORIES)}
+                  </span>
                   {cat.label}
                 </Link>
               );
@@ -123,7 +125,9 @@ export default function HomePage() {
                 href={href}
                 className="group block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600 dark:hover:bg-blue-900/20"
               >
-                <div className="text-base font-medium text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">{name}</div>
+                <div className="text-base font-medium text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                  {name}
+                </div>
               </Link>
             );
           })}
@@ -222,7 +226,6 @@ export default function HomePage() {
           moslashtiriladi.
         </p>
       </div>
-
     </main>
   );
 }

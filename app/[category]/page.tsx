@@ -37,7 +37,10 @@ export default async function CategoryPage({ params }: { params: Params }) {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <div className="flex flex-wrap items-center gap-2 text-base text-gray-600 dark:text-gray-400">
-        <Link href="/" className="transition-colors hover:text-blue-600 hover:underline dark:hover:text-blue-400">
+        <Link
+          href="/"
+          className="transition-colors hover:text-blue-600 hover:underline dark:hover:text-blue-400"
+        >
           Bosh sahifa
         </Link>
         <span>→</span>
