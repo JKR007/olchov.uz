@@ -147,9 +147,24 @@ export const CATEGORIES: Record<CategorySlug, CategoryConfig> = {
         keywords: ["sm dyuym", "cm to inch", "1 sm necha dyuym"],
       },
       {
+        from: "dyuym",
+        to: "millimetr",
+        keywords: ["dyum mm", "inch to mm", "1 dyuym necha mm"],
+      },
+      {
+        from: "millimetr",
+        to: "dyuym",
+        keywords: ["mm dyuym", "mm to inch", "1 mm necha dyuym"],
+      },
+      {
         from: "metr",
         to: "fut",
         keywords: ["metir fut", "m to ft", "1 metr necha fut"],
+      },
+      {
+        from: "fut",
+        to: "metr",
+        keywords: ["fut metr", "ft to m", "1 fut necha metr"],
       },
       {
         from: "kilometr",
@@ -157,9 +172,9 @@ export const CATEGORIES: Record<CategorySlug, CategoryConfig> = {
         keywords: ["km mil", "km to mile", "1 km necha mil"],
       },
       {
-        from: "millimetr",
-        to: "dyuym",
-        keywords: ["mm dyuym", "mm to inch", "1 mm necha dyuym"],
+        from: "mil",
+        to: "kilometr",
+        keywords: ["mil km", "mile to km", "1 mil necha km"],
       },
     ],
   },
@@ -181,14 +196,24 @@ export const CATEGORIES: Record<CategorySlug, CategoryConfig> = {
         keywords: ["lbs kg", "lb to kg", "1 funt necha kg"],
       },
       {
-        from: "gramm",
-        to: "untsiya",
-        keywords: ["g oz", "grams to ounces", "1 gramm necha untsiya"],
+        from: "kg",
+        to: "tonna",
+        keywords: ["kg t", "kg to ton", "1 kg necha tonna"],
       },
       {
         from: "tonna",
         to: "kg",
         keywords: ["t kg", "ton to kg", "1 tonna necha kg"],
+      },
+      {
+        from: "gramm",
+        to: "untsiya",
+        keywords: ["g oz", "grams to ounces", "1 gramm necha untsiya"],
+      },
+      {
+        from: "untsiya",
+        to: "gramm",
+        keywords: ["oz g", "ounces to grams", "1 untsiya necha gramm"],
       },
     ],
   },
@@ -225,13 +250,28 @@ export const CATEGORIES: Record<CategorySlug, CategoryConfig> = {
       },
       {
         from: "sotix",
+        to: "kvadrat-metr",
+        keywords: ["sotix m2", "sotix kvadrat metr", "1 sotix necha m2"],
+      },
+      {
+        from: "kvadrat-metr",
         to: "gektar",
-        keywords: ["sotix gektar", "1 gektar necha sotix"],
+        keywords: ["m2 gektar", "kvadrat metr gektar", "1 m2 necha gektar"],
       },
       {
         from: "gektar",
         to: "kvadrat-metr",
         keywords: ["gektar m2", "ha m2", "1 gektar necha m2"],
+      },
+      {
+        from: "sotix",
+        to: "gektar",
+        keywords: ["sotix gektar", "1 gektar necha sotix"],
+      },
+      {
+        from: "gektar",
+        to: "sotix",
+        keywords: ["gektar sotix", "1 gektar necha sotix"],
       },
     ],
   },
@@ -253,9 +293,19 @@ export const CATEGORIES: Record<CategorySlug, CategoryConfig> = {
         keywords: ["gallon litr", "gallon to liter", "1 gallon necha litr"],
       },
       {
+        from: "litr",
+        to: "ml",
+        keywords: ["litr ml", "liter to ml", "1 litr necha ml"],
+      },
+      {
         from: "ml",
         to: "litr",
         keywords: ["ml litr", "ml to liter", "1000 ml necha litr"],
+      },
+      {
+        from: "litr",
+        to: "kub-metr",
+        keywords: ["litr m3", "liter to m3", "1 litr necha m3"],
       },
       {
         from: "kub-metr",
