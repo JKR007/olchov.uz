@@ -85,21 +85,31 @@ export default async function ConverterPage({ params }: { params: Params }) {
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-        <Link href="/" className="hover:underline">
+      <div className="flex flex-wrap items-center gap-2 text-base text-gray-600 dark:text-gray-400">
+        <Link
+          href="/"
+          className="transition-colors hover:text-blue-600 hover:underline dark:hover:text-blue-400"
+        >
           Bosh sahifa
         </Link>
         <span>→</span>
-        <Link href={`/${config.slug}`} className="hover:underline">
+        <Link
+          href={`/${config.slug}`}
+          className="transition-colors hover:text-blue-600 hover:underline dark:hover:text-blue-400"
+        >
           {config.label}
         </Link>
+        <span>→</span>
+        <span className="text-gray-900 dark:text-white">
+          {fromLabel} → {toLabel}
+        </span>
       </div>
 
       <header className="mt-4">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-3xl">
+        <h1 className="text-3xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
           {fromLabel}ni {toLabel}ga aylantirish
         </h1>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
           {fromLabel}ni {toLabel}ga tez va aniq aylantiring. Real vaqtda hisob-kitob.
         </p>
       </header>
@@ -118,13 +128,13 @@ export default async function ConverterPage({ params }: { params: Params }) {
 
       {/* Formula / Explanation block (SEO template) */}
       <section className="mt-8 space-y-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
           {fromLabel}dan {toLabel}ga o&apos;tkazish formulasi
         </h2>
-        <p className="text-sm text-gray-700 dark:text-gray-300">
+        <p className="text-base text-gray-700 dark:text-gray-300">
           Bu yerda qisqa va aniq izoh bo&apos;ladi.
         </p>
-        <p className="text-sm text-gray-700 dark:text-gray-300">
+        <p className="text-base text-gray-700 dark:text-gray-300">
           Foydalanuvchilar {fromLabel}ni turlicha yozishi mumkin (masalan:{" "}
           {getUnitVariants(from).slice(0, 4).join(", ") || "—"}).
         </p>
@@ -132,13 +142,13 @@ export default async function ConverterPage({ params }: { params: Params }) {
 
       {/* Related links (minimal) */}
       <section className="mt-8 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
           Bog&apos;liq konvertorlar
         </h2>
         <div className="mt-3 space-y-2">
           {/* Related conversions: reverse + first 2 in category */}
           <Link
-            className="block text-sm text-gray-900 hover:underline dark:text-white"
+            className="block text-base text-gray-900 transition-colors hover:text-blue-600 hover:underline dark:text-white dark:hover:text-blue-400"
             href={reverseHref}
           >
             {toLabel} → {fromLabel}
@@ -155,7 +165,7 @@ export default async function ConverterPage({ params }: { params: Params }) {
               return (
                 <Link
                   key={href}
-                  className="block text-sm text-gray-900 hover:underline dark:text-white"
+                  className="block text-base text-gray-900 transition-colors hover:text-blue-600 hover:underline dark:text-white dark:hover:text-blue-400"
                   href={href}
                 >
                   {getUnitLabel(p.from)} → {getUnitLabel(p.to)}

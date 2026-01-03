@@ -103,7 +103,7 @@ export default function ConverterClient({
 
   return (
     <section className="mt-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
         {fromLabel} → {toLabel} konvertori
       </h2>
 
@@ -112,7 +112,7 @@ export default function ConverterClient({
         <div>
           <label
             htmlFor="converter-from"
-            className="block text-sm font-medium text-gray-900 dark:text-white"
+            className="block text-base font-medium text-gray-900 dark:text-white"
           >
             {fromLabel}
             {fromSymbol && (
@@ -123,13 +123,13 @@ export default function ConverterClient({
             id="converter-from"
             type="text"
             inputMode="decimal"
-            className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black/10 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:ring-white/20"
+            className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base outline-none focus:ring-2 focus:ring-black/10 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:ring-white/20"
             placeholder="Masalan: 1"
             value={raw}
             onChange={(e) => setRaw(e.target.value)}
             aria-label={`${fromLabel} qiymati`}
           />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Vergul ham bo&apos;ladi: <span className="font-medium">1,5</span>
           </p>
         </div>
@@ -138,7 +138,7 @@ export default function ConverterClient({
         <div>
           <label
             htmlFor="converter-to"
-            className="block text-sm font-medium text-gray-900 dark:text-white"
+            className="block text-base font-medium text-gray-900 dark:text-white"
           >
             {toLabel}
             {toSymbol && (
@@ -149,7 +149,7 @@ export default function ConverterClient({
             <input
               id="converter-to"
               type="text"
-              className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 pr-10 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 pr-10 text-base dark:border-gray-600 dark:bg-gray-700 dark:text-white"
               value={result}
               readOnly
               placeholder="Natija"
@@ -204,7 +204,7 @@ export default function ConverterClient({
       <div className="mt-4 flex flex-wrap gap-2">
         <Link
           href={reverseHref}
-          className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+          className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 hover:underline dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:border-blue-600 dark:hover:bg-blue-900/20 dark:hover:text-blue-400"
         >
           Teskari konvertor: {toLabel} → {fromLabel}
         </Link>
@@ -212,7 +212,7 @@ export default function ConverterClient({
 
       {/* Result Info */}
       {result && (
-        <div className="mt-4 text-xs text-gray-600 dark:text-gray-400">
+        <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
           <span>
             Natija: <span className="font-semibold text-gray-900 dark:text-white">{result}</span>{" "}
             {toLabel}

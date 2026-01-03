@@ -37,6 +37,97 @@ V1 **global ilmiy**, **kam ishlatiladigan** yoki **backend talab qiladigan** (ma
 
 ---
 
+## 2.1 V1 UI/Design implementatsiyasi
+
+V1 da qabul qilingan **konkret UI va dizayn qarorlari**:
+
+### 2.1.1 Tipografiya va shriftlar
+- **Shrift**: Geist Sans (Google Fonts)
+- **Asosiy matn o‘lchami**: 16px (base)
+- **H1**: 2rem (mobil), 2.5rem (desktop)
+- **H2**: 1.5rem (mobil), 1.75rem (desktop)
+- **H3**: 1.25rem
+- **Line height**: 1.6 (matn), 1.2-1.4 (sarlavhalar)
+- **Font weight**: 600 (sarlavhalar), 400 (matn)
+
+### 2.1.2 Rang sxemasi
+- **Asosiy rang**: Moviy (blue) — App Store uslubida
+- **Navbar/Footer fon**: Moviy gradient (`from-blue-100 to-blue-50`)
+- **Dark mode**: `gray-950` (fon), `gray-50` (matn)
+- **Havolalar hover**: Moviy (`blue-600` light, `blue-400` dark)
+- **Logo**: Moviy gradient text (`from-blue-600 to-blue-500`)
+
+### 2.1.3 Komponentlar
+
+#### Navbar
+- **Joylashuv**: Har bir sahifada yuqorida
+- **Tarkibi**:
+  - Logo (olchov.uz) — hoverda moviy underline
+  - Navigation links (Bosh sahifa, kategoriyalar)
+  - Theme toggle (dark/light)
+- **Stil**: Moviy gradient fon, border-bottom
+- **Responsive**: Mobilda navigation links yashirinadi
+
+#### Footer
+- **Joylashuv**: Har bir sahifada pastda
+- **Tarkibi**: 4 ustun (grid)
+  - O'lchov.uz (haqida)
+  - Kategoriyalar (links)
+  - Havolalar
+  - Ma'lumot (copyright)
+- **Stil**: Moviy gradient fon, border-top
+- **Responsive**: Mobilda 1 ustun
+
+### 2.1.4 Havolalar (Links) dizayni
+- **Default**: Underline (3px offset)
+- **Hover**: 
+  - Underline thickness: 2px
+  - Rang: Moviy (`blue-600` light, `blue-400` dark)
+- **Button-style links**: 
+  - Border, rounded-lg
+  - Hover: background color o'zgaradi
+  - Shadow effects
+
+### 2.1.5 Kategoriya ikonlari
+- Har bir kategoriya uchun SVG ikon:
+  - Uzunlik: 📏 (ruler icon)
+  - Og'irlik: ⚖️ (scale icon)
+  - Maydon: 📐 (area icon)
+  - Hajm: 🥤 (volume icon)
+  - Harorat: 🌡️ (thermometer icon)
+- Ikonlar homepage, category pages va footer'da ishlatiladi
+
+### 2.1.6 Konvertor nomlari
+- **Format**: `Dyuym → Santimetr (in → cm)`
+- Abbreviationlar qavs ichida ko'rsatiladi
+- Masalan: "Dyuym → Santimetr (in → cm)", "Kilogramm → Funt (kg → lb)"
+
+### 2.1.7 Breadcrumbs
+- **Format**: `Bosh sahifa > Kategoriya > Konvertor`
+- **Misol**: `Bosh sahifa > Uzunlik > Dyuym → Santimetr`
+- To'liq yo'l ko'rsatiladi (SEO uchun)
+
+### 2.1.8 Dark/Light theme
+- **Library**: `next-themes`
+- **Default**: System preference
+- **Persistence**: localStorage
+- **Toggle**: Navbar'da button
+- **Smooth transition**: 0.2s ease
+
+### 2.1.9 Visual enhancements
+- **Borders**: Button-style links uchun
+- **Shadows**: Section'lar uchun subtle shadows
+- **Background colors**: Section'lar uchun background colors
+- **Gradients**: Navbar va Footer'da gradient fonlar
+
+### 2.1.10 Responsive dizayn
+- **Mobile-first**: Barcha dizayn mobile'dan boshlanadi
+- **Breakpoints**: Tailwind CSS standard breakpoints
+- **Grid**: Footer 4 ustun (desktop), 1 ustun (mobile)
+- **Navigation**: Desktop'da ko'rinadi, mobile'da yashirinadi
+
+---
+
 ## 3. Routing modeli (muhim)
 
 V1 da **har bir konvertatsiya jufti uchun bitta sahifa** yaratiladi.
