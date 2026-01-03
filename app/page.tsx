@@ -16,7 +16,13 @@ function getUnitLabel(unitSlug: string): string {
   return unit?.label ?? unitSlug;
 }
 
-// Helper: Get converter page name from path
+// Helper: Get unit symbol from slug
+function getUnitSymbol(unitSlug: string): string | undefined {
+  const unit = Object.values(UNITS).find((u) => u.slug === unitSlug);
+  return unit?.symbol;
+}
+
+// Helper: Get converter page name from path with abbreviations
 function getConverterName(path: string): string {
   const parts = path.split("/");
   if (parts.length !== 3) return path;
@@ -25,6 +31,12 @@ function getConverterName(path: string): string {
   if (!found) return path;
   const fromLabel = getUnitLabel(found.from);
   const toLabel = getUnitLabel(found.to);
+  const fromSymbol = getUnitSymbol(found.from);
+  const toSymbol = getUnitSymbol(found.to);
+  
+  if (fromSymbol && toSymbol) {
+    return `${fromLabel} → ${toLabel} (${fromSymbol} → ${toSymbol})`;
+  }
   return `${fromLabel} → ${toLabel}`;
 }
 
@@ -151,6 +163,8 @@ export default function HomePage() {
                     const href = `/${cat.slug}/${p.from}-${p.to}`;
                     const fromLabel = getUnitLabel(p.from);
                     const toLabel = getUnitLabel(p.to);
+                    const fromSymbol = getUnitSymbol(p.from);
+                    const toSymbol = getUnitSymbol(p.to);
                     return (
                       <Link
                         key={href}
@@ -158,6 +172,11 @@ export default function HomePage() {
                         className="block rounded-lg border border-gray-200 bg-white px-3 py-2 text-base font-medium text-gray-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-blue-600 dark:hover:bg-blue-900/20 dark:hover:text-blue-400"
                       >
                         {fromLabel} → {toLabel}
+                        {fromSymbol && toSymbol && (
+                          <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
+                            ({fromSymbol} → {toSymbol})
+                          </span>
+                        )}
                       </Link>
                     );
                   })}
