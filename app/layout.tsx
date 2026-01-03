@@ -19,6 +19,37 @@ export const metadata: Metadata = {
   title: "O'lchov birliklari konvertori — Uzunlik, og'irlik, maydon | olchov.uz",
   description:
     "Dyuym, santimetr, metr, kg, funt, sotix, gektar va boshqalarni onlayn aylantiring. Bepul va tez — olchov.uz",
+  icons: {
+    icon: [
+      { url: "/metaimage.jpg", type: "image/jpeg" },
+    ],
+    apple: [
+      { url: "/metaimage.jpg", type: "image/jpeg" },
+    ],
+    shortcut: "/metaimage.jpg",
+  },
+  openGraph: {
+    title: "O'lchov birliklari konvertori — Uzunlik, og'irlik, maydon | olchov.uz",
+    description:
+      "Dyuym, santimetr, metr, kg, funt, sotix, gektar va boshqalarni onlayn aylantiring. Bepul va tez — olchov.uz",
+    images: [
+      {
+        url: "/metaimage.jpg",
+        width: 1200,
+        height: 630,
+        alt: "O'lchov birliklari konvertori",
+      },
+    ],
+    type: "website",
+    siteName: "olchov.uz",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "O'lchov birliklari konvertori — Uzunlik, og'irlik, maydon | olchov.uz",
+    description:
+      "Dyuym, santimetr, metr, kg, funt, sotix, gektar va boshqalarni onlayn aylantiring. Bepul va tez — olchov.uz",
+    images: ["/metaimage.jpg"],
+  },
 };
 
 export default function RootLayout({
